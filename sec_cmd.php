@@ -1,11 +1,11 @@
 <?php
 if(isset($_GET['ping'])){
-    $command = $_GET['ping'];
-    $whitelist = "/^[a-zA-Z1-9.]+$/";
-    if(!preg_match($whitelist,$command)){
+    $command = $_GET['ping'];             // Lấy giá trị của trong form input
+    $whitelist = "/^[a-zA-Z1-9.]+$/";     // tạo một whitelist những kí tự được cho phép.
+    if(!preg_match($whitelist,$command)){ //kiểm tra có kí tự nào khác không nếu có cho dừng và xuất ra thông báo.
         die("ký tự nguy hiểm nhập lại");
     }
-    $ping = escapeshellarg($command);
+    $ping = escapeshellarg($command);     //kiểm ta thêm lần nữa bằng hàm escapeshellarg() rồi mới thực thi lệnh ping.
     $res = shell_exec("timeout 3 ping -c 4 $ping");
     echo $res;
 }
